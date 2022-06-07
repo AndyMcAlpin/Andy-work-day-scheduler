@@ -10,9 +10,9 @@ hours.forEach((hour) => {
     const save = $('<button>');
 
     row.addClass('row time-block');
-    time.addClass('hour');
-    text.addClass('description');
-    save.addClass('saveBtn far fa-save');
+    time.addClass('hour col-1');
+    text.addClass('description col-10');
+    save.addClass('saveBtn far fa-save col-1');
 
     row.attr('id', hour);
     
@@ -26,4 +26,24 @@ hours.forEach((hour) => {
 
     row.append(time, text, save);
     $('.container').append(row);
-} )
+})
+
+const currentHour = moment().hours();
+
+$('.time-block').each(function() {
+    const rowHour = parseInt($(this).attr('id'));
+    if (rowHour > currentHour) {
+        $(this).removeClass('past');
+        $(this).removeClass('present');
+        $(this).addClass('future');
+    } 
+    else if (rowHour === currentHour) {
+        $(this).removeClass('past');
+        $(this).addClass('present');
+        $(this).removeClass('future');
+    } else {
+        $(this).addClass('past');
+        $(this).removeClass('present');
+        $(this).removeClass('future');
+    }
+})
