@@ -47,3 +47,15 @@ $('.time-block').each(function() {
         $(this).removeClass('future');
     }
 })
+
+function saveInfo () {
+    const rowTime = $(this).parent().attr('id');
+    const scheduleNote = $(this).siblings('.description').val();
+    localStorage.setItem(rowTime, scheduleNote);
+}
+
+hours.forEach((hour) => {
+    $(`#${hour} .description`).val(localStorage.getItem(hour));
+})
+
+$('.saveBtn').click(saveInfo);
